@@ -7,6 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace NBA_Application
 {
+    /// <summary>
+    /// Homepage for this web-application here you can view today's matches or matches on another date.
+    /// You can also search for a specific player or other object or search for all objects.
+    /// Administrators can sign in to get to the administration-form.
+    /// </summary>
     public partial class Webform1 : System.Web.UI.Page
     {
         DatabaseConnection db;
@@ -40,6 +45,10 @@ namespace NBA_Application
             }
         }
 
+        /// <summary>
+        /// This method is used for getting matches on a specific date. On load it automatically gets today's matches
+        /// </summary>
+        /// <param name="date">Date to search for in the database</param>
         private void GetMatches(DateTime date)
         {
             List<Match> Matches = db.GetMatches(date);
@@ -115,7 +124,11 @@ namespace NBA_Application
             }
 
         }
-
+        /// <summary>
+        /// Confirm button for searching, in a textbox a searchterm is written and there can be filtered on different object
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             string searchterm = tbSearch.Text;
@@ -153,6 +166,11 @@ namespace NBA_Application
 
         }
 
+        /// <summary>
+        /// Confirm for login of an administrator. This is only simulated for this version and will be expanded later on.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnAdmin_Click(object sender, EventArgs e)
         {
             string username = tbUsername.Text;

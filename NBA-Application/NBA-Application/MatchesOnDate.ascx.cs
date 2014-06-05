@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 
 namespace NBA_Application
 {
+    /// <summary>
+    /// User control that is used for searching matches on a specified date and showing them in a listbox
+    /// </summary>
     public partial class MatchesOnDate : System.Web.UI.UserControl
     {
         DatabaseConnection db;

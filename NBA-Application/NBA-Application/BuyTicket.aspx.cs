@@ -8,6 +8,9 @@ using EO.Web;
 
 namespace NBA_Application
 {
+    /// <summary>
+    /// On this page it is possible to buy tickets for a selected date. You are redirected here from the Homepage.
+    /// </summary>
     public partial class BuyTicket : System.Web.UI.Page
     {
         DatabaseConnection db;
@@ -16,6 +19,12 @@ namespace NBA_Application
             db = new DatabaseConnection();
         }
 
+        /// <summary>
+        /// Confirm your purchase of a tickets of a selected match
+        /// when name and banknumber have been filled in.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnBuy_Click(object sender, EventArgs e)
         {
             System.Web.UI.WebControls.ListBox MatchChoice = (System.Web.UI.WebControls.ListBox)TicketMatchOnDate.FindControl("lbMatches");

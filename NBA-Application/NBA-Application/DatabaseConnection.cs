@@ -7,6 +7,9 @@ using Oracle.DataAccess.Types;
 
 namespace NBA_Application
 {
+    /// <summary>
+    /// This class is used to make a connection with the Oracle Database and add objects to this database
+    /// </summary>
     public class DatabaseConnection
     {
         public OracleConnection conn;
@@ -24,6 +27,12 @@ namespace NBA_Application
            
         }
 
+        /// <summary>
+        /// Gets the Max id from a specified table + 1 and returns this so an insert query always has a valid identifier
+        /// </summary>
+        /// <param name="ID">ID thats gets checked for maximum</param>
+        /// <param name="tabelname">Table where the ID is getting checked in</param>
+        /// <returns></returns>
         public int GetInsertID(string ID, string tabelname)
         {
             string insertID = "Select NVL(Max(" + ID + "), 0)" + " + 1 as MaxID From " + tabelname;
@@ -54,6 +63,14 @@ namespace NBA_Application
             return 0;
         }
 
+        /// <summary>
+        /// This method gets and returns an ID from a given name
+        /// </summary>
+        /// <param name="Name">Name to search on</param>
+        /// <param name="tabelname">Table to search in</param>
+        /// <param name="idcolumn">Column where the ID will be returned from</param>
+        /// <param name="namecolumn">Column where the name will be returned from</param>
+        /// <returns></returns>
         private int GetIDFromName(string Name, string tabelname, string idcolumn, string namecolumn)
         {
             string insertID = "SELECT " + idcolumn + " From " + tabelname + " WHERE " + namecolumn + " = :parName";
@@ -86,7 +103,11 @@ namespace NBA_Application
             return 0;
         }
             
-
+        /// <summary>
+        /// Adds a player to the database using the given information
+        /// </summary>
+        /// <param name="player">Object player that has all the information that will get added to the database</param>
+        /// <returns></returns>
         public bool AddPlayer(Player player)
         {
             InsertID = GetInsertID("PlayerID", "Player");
@@ -118,6 +139,11 @@ namespace NBA_Application
             return false;
         }
 
+        /// <summary>
+        /// Adds a team to the database using the given information
+        /// </summary>
+        /// <param name="team">Object team that has all the information that gets added to the database</param>
+        /// <returns></returns>
         public bool AddTeam(Team team)
         {
             string sql = "INSERT INTO Team (TeamName, City, Founded, Championships, Conference, Division, CompetitionID_, StadiumName) VALUES (" +
@@ -149,6 +175,11 @@ namespace NBA_Application
             return false;
         }
 
+        /// <summary>
+        /// Adds a match to the database using the given information
+        /// </summary>
+        /// <param name="match">Object Match that has all the information to add the Match to the database</param>
+        /// <returns></returns>
         public bool AddMatch(Match match)
         {
             InsertID = GetInsertID("MatchID", "Match");
@@ -179,6 +210,11 @@ namespace NBA_Application
             return false;
         }
 
+        /// <summary>
+        /// Adds a team_employee to the database using the given information
+        /// </summary>
+        /// <param name="team_employee">Object team_employee that has all the information to add to the database</param>
+        /// <returns></returns>
         public bool AddTeam_Employee(Team_Employee team_employee)
         {
             InsertID = GetInsertID("EmpID", "Team_Employee");
@@ -213,6 +249,11 @@ namespace NBA_Application
             return false;
         }
 
+        /// <summary>
+        /// Adds a stadium to the database using the given information
+        /// </summary>
+        /// <param name="stadium">Object stadium that has all the information to add to the database</param>
+        /// <returns></returns>
         public bool AddStadium(Stadium stadium)
         {
             string sql = "INSERT INTO Stadium (Stadium_Name, Location, Max_People) VALUES (" +
@@ -239,6 +280,12 @@ namespace NBA_Application
             return false;
         }
 
+        /// <summary>
+        /// Adds a single ticket to the database using the given information
+        /// </summary>
+        /// <param name="price">price of the given ticket</param>
+        /// <param name="match">Object match that shows for which match the single is good for</param>
+        /// <returns></returns>
         public bool AddSingle(int price, Match match)
         {
             InsertID = GetInsertID("TicketID", "Ticket");
@@ -265,6 +312,13 @@ namespace NBA_Application
             return false;
         }
 
+        /// <summary>
+        /// Adds a season-ticket to the database using the given information
+        /// </summary>
+        /// <param name="price">price of the given ticket</param>
+        /// <param name="begindate">date when the ticket can be used</param>
+        /// <param name="team">Object team for which the season-ticket is good for</param>
+        /// <returns></returns>
         public bool AddSeasonTicket(int price, DateTime begindate, string team)
         {
             InsertID = GetInsertID("TicketID", "Ticket");
@@ -292,6 +346,11 @@ namespace NBA_Application
             return false;
         }
 
+        /// <summary>
+        /// Adds a event to the database using the given information
+        /// </summary>
+        /// <param name="newevent">Object event that has the information for the to be added event</param>
+        /// <returns></returns>
         public bool AddEvent(Event newevent)
         {
             InsertID = GetInsertID("EventID","Event");
@@ -321,6 +380,11 @@ namespace NBA_Application
             return false;
         }
 
+        /// <summary>
+        /// Gets all matches on a specified date
+        /// </summary>
+        /// <param name="date">Given date to search on</param>
+        /// <returns></returns>
         public List<Match> GetMatches(DateTime date)
         {
             string sql = "Select * From Match Where TRUNC(DATETIME) = TO_DATE(:parDateMatch, 'dd-MM-yy')";
@@ -367,6 +431,13 @@ namespace NBA_Application
             
         }
 
+        /// <summary>
+        /// Searches for multiple objects using a searchterm and a filter
+        /// </summary>
+        /// <param name="searchterm">Text the database will search on</param>
+        /// <param name="filter">Tabel in which the database will search in</param>
+        /// <param name="searchon">Namecolumn to search on</param>
+        /// <returns></returns>
         public List<ISearchable> SearchMultipleObjects(string searchterm, string filter, string searchon)
         {
             string sql = "SELECT * FROM " + filter + " Where " + searchon + " LIKE '%' || :parTerm || '%'";
@@ -451,6 +522,14 @@ namespace NBA_Application
             return null;
         }
 
+        /// <summary>
+        /// Adds the details of a match to the database using the given information
+        /// </summary>
+        /// <param name="MatchID">MatchID from the match that gets updated</param>
+        /// <param name="home_score">Home score that gets added to the database</param>
+        /// <param name="away_score">Away score that gets added to the database</param>
+        /// <param name="top_scorer">Player with the most points in this game</param>
+        /// <returns></returns>
         public bool AddDetails(int MatchID, int home_score, int away_score, string top_scorer)
         {
             string sql = "UPDATE Match SET Score_Home = :parHome, Score_Away = :parAway, Topscorer = :parTop_Scorer, Status = 'PLAYED' Where MatchID = :parMatchID";
@@ -474,6 +553,13 @@ namespace NBA_Application
             }
             return false;
         }
+        /// <summary>
+        /// This method add a purchase for a ticket to the database and also the customer
+        /// </summary>
+        /// <param name="MatchID">MatchID of the ticket</param>
+        /// <param name="name">Name of the customer</param>
+        /// <param name="banknumber">Banknumber of the customer</param>
+        /// <returns></returns>
         public bool BuyTicket(int MatchID, string name, string banknumber)
         {
             InsertID = GetInsertID("CustID", "Customer");

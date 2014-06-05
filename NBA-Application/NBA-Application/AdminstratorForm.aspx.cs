@@ -10,6 +10,10 @@ namespace NBA_Application
 {
     public partial class AdminstratorForm : System.Web.UI.Page
     {
+        /// <summary>
+        /// Administrator page, this page is only accessible for administrators that have signed in on the homepage.
+        /// On this page its possible to add player,team,stadiums,events,tickets and team-employees and also update end scores for played matches.
+        /// </summary>
         DatabaseConnection db;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,6 +35,9 @@ namespace NBA_Application
             
         }
 
+        /// <summary>
+        /// fills all dropdownlist controls on this page
+        /// </summary>
         private void FillDropDown()
         {
             List<ISearchable> Employees = db.SearchMultipleObjects("", "Team_Employee", "EmpName");
@@ -114,6 +121,12 @@ namespace NBA_Application
 
         }
 
+        /// <summary>
+        /// Adds a player to the database when all fields have been filled in correctly
+        /// or else a error message is shown.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnAddPConfirm_Click(object sender, EventArgs e)
         {
             string PlayerName = tbPlayerName.Text;
@@ -140,6 +153,12 @@ namespace NBA_Application
             }
         }
 
+        /// <summary>
+        /// Adds a team to the database when all fields have been filled in correctly
+        /// or else a error message is shown.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnAddTeamConfirm_Click(object sender, EventArgs e)
         {
             string TeamName = tbTeamName.Text;
@@ -164,6 +183,12 @@ namespace NBA_Application
 
         }
 
+        /// <summary>
+        /// Adds a match to the database when all fields have been filled in correctly
+        /// or else a error message is shown.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnAddMConfirm_Click(object sender, EventArgs e)
         {
             DateTime MatchDateTime = dpDateMatch.SelectedDate;
@@ -195,6 +220,12 @@ namespace NBA_Application
             }
         }
 
+        /// <summary>
+        /// Adds end-scores of a played match the database when all fields have been filled in correctly
+        /// or else a error message is shown.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnAddDetailsConfirm_Click(object sender, EventArgs e)
         {
             System.Web.UI.WebControls.ListBox MatchChoice = (System.Web.UI.WebControls.ListBox)ucMatchesOnDateDetails.FindControl("lbMatches");
@@ -226,7 +257,13 @@ namespace NBA_Application
             
 
         }
-        
+
+        /// <summary>
+        /// Adds a team-employee to the database when all fields have been filled in correctly
+        /// or else a error message is shown.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnAddEConfirm_Click(object sender, EventArgs e)
         {
             string EmployeeName = tbEmployeeName.Text;
@@ -253,6 +290,12 @@ namespace NBA_Application
             }
         }
 
+        /// <summary>
+        /// Adds a stadium to the database when all fields have been filled in correctly
+        /// or else a error message is shown.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnAddSConfirm_Click(object sender, EventArgs e)
         {
             string StadiumName = tbStadiumName.Text;
@@ -273,6 +316,12 @@ namespace NBA_Application
             }
         }
 
+        /// <summary>
+        /// Adds a ticket for only 1 match to the the database when all fields have been filled in correctly
+        /// or else a error message is shown.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnAddSingle_Click(object sender, EventArgs e)
         {
             System.Web.UI.WebControls.ListBox MatchChoice = (System.Web.UI.WebControls.ListBox)ucMatchesOnDateSingle.FindControl("lbMatches");
@@ -311,6 +360,12 @@ namespace NBA_Application
             }
         }
 
+        /// <summary>
+        /// Adds a ticket for the whole season for 1 team to the database when all fields have been filled in correctly
+        /// or else a error message is shown.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnAddSeasonTConfirm_Click(object sender, EventArgs e)
         {
             string ChosenTeam = ddlSeasonTeam.SelectedValue;
@@ -333,6 +388,12 @@ namespace NBA_Application
             }
         }
 
+        /// <summary>
+        /// Adds an event to the database when all fields have been filled in correctly
+        /// or else a error message is shown.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnAddEventConfirm_Click(object sender, EventArgs e)
         {
             string EventName = tbNameEvent.Text;

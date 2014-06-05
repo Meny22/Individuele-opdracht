@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 
 namespace NBA_Application
 {
+    /// <summary>
+    /// Usercontrol that gets added to the Home page for each match on a selected date
+    /// </summary>
     public partial class WebUserControl1 : System.Web.UI.UserControl
     {
         DatabaseConnection db;
