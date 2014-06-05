@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBA-Application", "NBA-Application\NBA-Application.csproj", "{982B624D-5D57-4F60-9C76-B90C43AB82FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetInsertIDTest", "GetInsertIDTest\GetInsertIDTest.csproj", "{779D4AAB-A957-4A35-A78A-8CAF75CB8409}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CE4EAF58-7FEB-4688-B3D7-352D41CC3446}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		NBA-Application.vsmdi = NBA-Application.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = NBA-Application.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{982B624D-5D57-4F60-9C76-B90C43AB82FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{982B624D-5D57-4F60-9C76-B90C43AB82FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{982B624D-5D57-4F60-9C76-B90C43AB82FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{982B624D-5D57-4F60-9C76-B90C43AB82FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{779D4AAB-A957-4A35-A78A-8CAF75CB8409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{779D4AAB-A957-4A35-A78A-8CAF75CB8409}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{779D4AAB-A957-4A35-A78A-8CAF75CB8409}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{779D4AAB-A957-4A35-A78A-8CAF75CB8409}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

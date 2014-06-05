@@ -1,0 +1,322 @@
+body
+{
+    background-image:url("Images/NBA-Background2.gif");
+    background-repeat:repeat;
+}
+
+.Match_not_played
+{
+    position:relative;
+    left: 145px;
+    top: 0px;
+    height: 182px;
+}
+
+.lblTime
+{
+    position: relative;
+	left: 30px;
+	top: 84px;
+}
+
+
+.btnBuy
+{
+	position: relative;
+	left: 20px;
+	top: 84px;
+}
+
+.imgHome
+{
+    position: relative;
+    right: 206px;
+    bottom: 26px;
+}
+
+.imgTv
+{
+    position: relative;
+    left: 40px;
+    top: 82px;
+}
+.lblTeamHome
+{
+    position: relative;
+    left: 126px;
+    top: 59px;
+}
+.lblTeamAway
+{
+    position: relative;
+    left: 89px;
+    top: 115px;
+}
+
+.lblStadium
+{
+     position: relative;
+     right: 174px;
+     top: 125px;
+ }
+ 
+ .btnBuyConfirm
+ {
+     position: relative;
+     left: 621px;
+     bottom: 67px;
+ }
+ 
+ .BuyPanel
+ {
+     position: relative;
+     left: 145px;
+ }
+#Logo
+{
+    position: relative;
+    left: 282px;
+}
+#pnlSearch
+{
+    position: relative;
+    left: 300px;
+        
+ }
+ #lblDate
+ {
+     position: relative;
+     left: 330px;
+     top: 13px;
+     font-size: 15pt;
+     
+ }
+ #pnlCalander
+ {
+     position:absolute;
+     left: 800px;
+     bottom: 460px;
+ }
+ #dpMatches
+ {
+     position:relative;
+     left: 332px;
+     bottom: 570px;
+ }
+ .panels
+ {
+     position: relative;
+     left: 453px;
+     top: 80px;
+ }
+ 
+ .btn-group
+ {
+     position: relative;
+     left: 314px;
+     top: 40px;
+ }
+ 
+ #btn-group2
+ {
+     position: relative;
+     left: 414px;
+ }
+ 
+ #tbPlayerName
+ {
+     position : relative;
+     left : 60px;
+ }
+ 
+ #ddlLength, #ddlWeight
+ {
+     position : relative;
+     left : 52px;
+ }
+ #lblDay
+ {
+     padding-left: 12px;
+ }
+ 
+ #lblWelcome
+ {
+     position: relative;
+     left: 936px;
+     top: 5px;
+ }
+ #tbTeamName
+ {
+     position: relative;
+     left: 1px;
+ }
+ #tbCity
+ {
+     position:relative;
+     left: 48px;
+ }
+ #tbFounded
+ {
+     position:relative;
+     left: 15px;
+ }
+ #ddlDivision
+ {
+     position:relative;
+     left: 25px;
+    top: 0px;
+    width: 120px;
+    height: 25px;
+}
+#ddlStadium
+{
+    position: relative;
+    left: 22px;
+    width: 100px;
+}
+#ddlAwayTeam
+{
+    position: relative;
+    left: 3px;
+}
+#ddlStadiumMatch
+{
+    position: relative;
+    left: 16px;
+}
+#tbAwayScore
+{
+    position: relative;
+    left: 3px;
+}
+#ddlTopscorer
+{
+    position: relative;
+    left: 7px;
+}
+#tbCollege
+{
+    position: relative;
+    left: 53px;
+}
+#tbFunction
+{
+    position: relative;
+    left: 46px;
+}
+#ddlAssistent
+{
+    position: relative;
+    left: 44px;
+}
+#ddlEmpTeam
+{
+    position: relative;
+    left: 65px;
+}
+#tbLocation
+{
+    position: relative;
+    left: 37.5px;
+}
+#tbMaxPeople
+{
+    position: relative;
+    left: 19px;
+}
+#lblSearchResult
+{
+    position: relative;
+    left: 597px;
+    top: 54px;
+    font-size: 25px;
+    font-family:Moire;
+}
+.lblAwayScore
+{
+    position: relative;
+    right: 164px;
+    bottom: -30px;
+}
+.lblAwayScoreLong
+{
+    position: relative;
+    right: 158px;
+    bottom: -30px;
+}
+.lblAwayScoreExtraLong
+{
+    position: relative;
+    right: 131px;
+    bottom: -30px;
+}
+.lblHomeScore
+{
+    position: relative;
+    left: 362px;
+    bottom: 110px;
+
+}
+#btnLogOut
+{
+    position: relative;
+    right: 271px;
+    top: 17px;
+}
+
+#lblNoMatches
+{
+    position: relative;
+    right: 241px;
+    top: 72px;
+    font-family: Moire;
+    font-size: 20px;
+}
+.lblHomeScoreLong
+{
+    position: relative;
+    left: 367px;
+    bottom: 110px;
+}
+.lblHomeScoreExtraLong
+{
+    position: relative;
+    left: 375px;
+    bottom: 110px;
+}
+#lblBuy
+{
+    font-size : 15px;
+    font-family:Moire;
+}
+#pnlBuyTickets
+{
+    position: relative;
+    left: 468px;
+    top: 100px;
+}
+#pnlAddTicketConfirm
+{
+    position: relative;
+    bottom: 82px;
+}
+#pnlAddSeasonTicket
+{
+    position: relative;
+    bottom: 82px;
+}
+#SearchResults
+{
+    position: relative;
+    left: 400px;
+    top: 100px;
+}
+.fontclass
+{
+    font-family : @NSimSun;
+}
+#lblName
+{
+    padding-left: 160px;
+}
+ 
