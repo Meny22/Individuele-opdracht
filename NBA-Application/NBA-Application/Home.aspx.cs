@@ -29,6 +29,7 @@ namespace NBA_Application
             if (!IsPostBack)
             {
                 GetMatches(DateTime.Now);
+                dpDateMatches.SelectedDate = DateTime.Now;
                 lblDate.Text = DateTime.Now.ToString("dd-MM-yyyy");
             }
             else
@@ -44,6 +45,7 @@ namespace NBA_Application
             List<Match> Matches = db.GetMatches(date);
             if (Matches.Count > 0)
             {
+                lblNoMatches.Visible = false;
                 foreach (Match m in Matches)
                 {
                     WebUserControl1 NotPlayed = LoadControl("~/MatchNotPlayed.ascx") as WebUserControl1;

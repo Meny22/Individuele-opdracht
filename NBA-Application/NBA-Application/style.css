@@ -34,6 +34,13 @@ body
     bottom: 26px;
 }
 
+#lblError
+{
+    position: relative;
+    right: -36px;
+    top: 89px;
+}
+
 .imgTv
 {
     position: relative;

@@ -46,6 +46,8 @@
         <asp:Button ID="btnAddEvent" class = "btn btn-primary" runat="server" Text="Add Event" 
             onclientclick="return false;" />
     </div>
+    <asp:Label ID="lblError" runat="server" ForeColor="#CC0000" 
+        Text="Not all fields are filled in correctly" Visible="False"></asp:Label>
     <div class = "panels">
     <asp:Panel ID="pnlAddPlayer" CssClass = "well" runat="server" 
             Height="187px" Width="449px">

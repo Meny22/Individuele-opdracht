@@ -42,6 +42,8 @@ namespace NBA_Application
             ddlDivision.Items.Clear();
             ddlConference.Items.Clear();
             ddlStadium.Items.Clear();
+            ddlTeam.Items.Clear();
+            ddlTopscorer.Items.Clear();
             foreach(Team_Employee t in Employees)
             {
                 ddlAssistent.Items.Add(t.EmployeeName);
@@ -128,8 +130,13 @@ namespace NBA_Application
                 Player NewPlayer = new Player(PlayerName, Length, Weight, School_Country, Birthdate, Pro_Year, Position, Team);
                 if (db.AddPlayer(NewPlayer))
                 {
+                    lblError.Visible = false;
                     FillDropDown();
                 }
+            }
+            else
+            {
+                lblError.Visible = true;
             }
         }
 
@@ -137,14 +144,22 @@ namespace NBA_Application
         {
             string TeamName = tbTeamName.Text;
             string City = tbCity.Text;
-            int Founded = Convert.ToInt32(tbFounded.Text);
-            string Conference = ddlConference.SelectedValue;
-            string Division = ddlDivision.SelectedValue;
-            string Stadium = ddlStadium.SelectedValue;
-            Team NewTeam = new Team(TeamName, City, Founded, Conference, Division, Stadium);
-            if (db.AddTeam(NewTeam))
+            int Founded = 0;
+            if (TeamName != string.Empty && City != string.Empty && int.TryParse(tbFounded.Text, out Founded))
             {
-                FillDropDown();
+                string Conference = ddlConference.SelectedValue;
+                string Division = ddlDivision.SelectedValue;
+                string Stadium = ddlStadium.SelectedValue;
+                Team NewTeam = new Team(TeamName, City, Founded, Conference, Division, Stadium);
+                if (db.AddTeam(NewTeam))
+                {
+                    lblError.Visible = false;
+                    FillDropDown();
+                }
+            }
+            else
+            {
+                lblError.Visible = true;
             }
 
         }
@@ -154,21 +169,29 @@ namespace NBA_Application
             DateTime MatchDateTime = dpDateMatch.SelectedDate;
             string HomeTeam = ddlHomeTeam.SelectedValue;
             string AwayTeam = ddlAwayTeam.SelectedValue;
-            string Stadium = ddlStadiumMatch.SelectedValue;
-            Match NewMatch = new Match(MatchDateTime, HomeTeam, AwayTeam, Stadium);
-            TextBox tbAmount = (TextBox)ucTicketsAddDetails.FindControl("tbTickets");
-            TextBox tbPrice = (TextBox)ucTicketsAddDetails.FindControl("tbPriceTicket");
-            int AmountOfTickets = Convert.ToInt32(tbAmount.Text);
-            int PriceTicket = Convert.ToInt32(tbPrice.Text);
-            int ID = db.GetInsertID("MatchID", "Match");
-            NewMatch.MatchID = ID;
-            if (db.AddMatch(NewMatch))
+            if (HomeTeam != AwayTeam)
             {
-                for (int i = 1; i <= AmountOfTickets; i++)
+                string Stadium = ddlStadiumMatch.SelectedValue;
+                Match NewMatch = new Match(MatchDateTime, HomeTeam, AwayTeam, Stadium);
+                TextBox tbAmount = (TextBox)ucTicketsAddDetails.FindControl("tbTickets");
+                TextBox tbPrice = (TextBox)ucTicketsAddDetails.FindControl("tbPriceTicket");
+                int AmountOfTickets = Convert.ToInt32(tbAmount.Text);
+                int PriceTicket = Convert.ToInt32(tbPrice.Text);
+                int ID = db.GetInsertID("MatchID", "Match");
+                bool Succes = false;
+                NewMatch.MatchID = ID;
+                if (db.AddMatch(NewMatch))
                 {
-                    db.AddSingle(PriceTicket, NewMatch);
+                    for (int i = 1; i <= AmountOfTickets; i++)
+                    {
+                        Succes = db.AddSingle(PriceTicket, NewMatch);
+                    }
+                    lblError.Visible = false;
                 }
-
+            }
+            else
+            {
+                lblError.Visible = true;
             }
         }
 
@@ -179,19 +202,28 @@ namespace NBA_Application
             List<Match> Matches = db.GetMatches(dpDate.SelectedDate);
             int HomeScore = Convert.ToInt32(tbHomeScore.Text);
             int AwayScore = Convert.ToInt32(tbAwayScore.Text);
-            string Topscorer = ddlTopscorer.SelectedValue;
-            foreach(Match m in Matches)
+            if (int.TryParse(tbHomeScore.Text, out HomeScore) && int.TryParse(tbAwayScore.Text, out AwayScore) && HomeScore != AwayScore)
             {
-                if(m.ToString() == MatchChoice.SelectedItem.ToString())
+                string Topscorer = ddlTopscorer.SelectedValue;
+                foreach (Match m in Matches)
                 {
-                    Match ChosenMatch = m;
-                    if (ChosenMatch.AddDetails(HomeScore, AwayScore, Topscorer))
+                    if (m.ToString() == MatchChoice.SelectedItem.ToString())
                     {
-                        break;
+                        Match ChosenMatch = m;
+                        if (ChosenMatch.AddDetails(HomeScore, AwayScore, Topscorer))
+                        {
+                            lblError.Visible = false;
+                            break;
+                        }
                     }
-                }
 
+                }
             }
+            else
+            {
+                lblError.Visible = true;
+            }
+            
 
         }
         
@@ -200,16 +232,24 @@ namespace NBA_Application
             string EmployeeName = tbEmployeeName.Text;
             string College = tbCollege.Text;
             string Function = tbFunction.Text;
-            string Assistent = "";
-            string TeamName = ddlEmpTeam.SelectedValue;
-            if (ddlAssistent.SelectedValue != "No Assistent")
+            if (EmployeeName != string.Empty && Function != string.Empty)
             {
-                Assistent = ddlAssistent.SelectedValue;
+                string Assistent = string.Empty;
+                string TeamName = ddlEmpTeam.SelectedValue;
+                if (ddlAssistent.SelectedValue != "No Assistent")
+                {
+                    Assistent = ddlAssistent.SelectedValue;
+                }
+                Team_Employee newEmployee = new Team_Employee(EmployeeName, College, Function, Assistent, TeamName);
+                if (db.AddTeam_Employee(newEmployee))
+                {
+                    lblError.Visible = false;
+                    FillDropDown();
+                }
             }
-            Team_Employee newEmployee = new Team_Employee(EmployeeName, College, Function, Assistent, TeamName);
-            if (db.AddTeam_Employee(newEmployee))
+            else
             {
-                FillDropDown();
+                lblError.Visible = true;
             }
         }
 
@@ -218,13 +258,18 @@ namespace NBA_Application
             string StadiumName = tbStadiumName.Text;
             string Location = tbLocation.Text;
             int MaxPeople = 0;
-            if (int.TryParse(tbMaxPeople.Text, out MaxPeople))
+            if (int.TryParse(tbMaxPeople.Text, out MaxPeople) && StadiumName != string.Empty && Location != string.Empty)
             {
                 Stadium NewStadium = new Stadium(StadiumName, Location, MaxPeople);
                 if (db.AddStadium(NewStadium))
                 {
+                    lblError.Visible = false;
                     FillDropDown();
                 }
+            }
+            else
+            {
+                lblError.Visible = true;
             }
         }
 
@@ -254,13 +299,14 @@ namespace NBA_Application
                             {
                                 db.AddSingle(Price, ChosenMatch);
                             }
+                            lblError.Visible = false;
                         }
 
                     }
                 }
                 else
                 {
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('You can't add more than 10 tickets at one time');", true);
+                    lblError.Visible = true;
                 }
             }
         }
@@ -279,16 +325,29 @@ namespace NBA_Application
                 {
                     db.AddSeasonTicket(Price, SeasonStart, ChosenTeam);
                 }
+                lblError.Visible = false;
+            }
+            else
+            {
+                lblError.Visible = true;
             }
         }
 
         protected void btnAddEventConfirm_Click(object sender, EventArgs e)
         {
             string EventName = tbNameEvent.Text;
-            string BeginDate = dpBeginDateEvent.SelectedDate.ToString("dd-MM-yyyy");
-            Event NewEvent = new Event(EventName, BeginDate);
-            if (db.AddEvent(NewEvent))
+            if (EventName != string.Empty)
             {
+                string BeginDate = dpBeginDateEvent.SelectedDate.ToString("dd-MM-yyyy");
+                Event NewEvent = new Event(EventName, BeginDate);
+                if (db.AddEvent(NewEvent))
+                {
+                    lblError.Visible = false;
+                }
+            }
+            else
+            {
+                lblError.Visible = true;
             }
         }
 
